@@ -1,0 +1,16 @@
+# Gradle and build output
+.gradle/
+build/
+out/
+
+# Dev and test game folders
+run/
+run-prod/
+run-prod-server/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+*.log
