@@ -154,6 +154,10 @@ python3 tools/gen_particles.py   # regenerate the particle textures
 python3 tools/gen_sounds.py      # regenerate the sound effects (needs numpy, scipy and ffmpeg)
 ```
 
+## Also in this repository: a Noita spell mod
+
+[`noita/`](noita/README.md) holds **Elemental Arts**, a separate mod for the game Noita that adds five elemental spells. It is independent of the Minecraft mod above. See [its README](noita/README.md) for the spells and install steps.
+
 ---
 
 This is an unofficial fan mod. It is not affiliated with or endorsed by Nickelodeon or the creators of *Avatar: The Last Airbender*. The code is MIT licensed. Fabric API is bundled under the Apache 2.0 license.

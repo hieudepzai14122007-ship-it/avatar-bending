@@ -1,0 +1,31 @@
+<!-- Spawned where a Tidal Orb bursts: a short fountain of real water. -->
+<Entity>
+
+	<ParticleEmitterComponent
+		emitted_material_name="water"
+		offset.x="0"
+		offset.y="-2"
+		x_pos_offset_min="-4"
+		x_pos_offset_max="4"
+		y_pos_offset_min="-4"
+		y_pos_offset_max="2"
+		x_vel_min="-130"
+		x_vel_max="130"
+		y_vel_min="-190"
+		y_vel_max="10"
+		count_min="30"
+		count_max="40"
+		lifetime_min="2.0"
+		lifetime_max="4.0"
+		create_real_particles="1"
+		emit_cosmetic_particles="0"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<LifetimeComponent
+		lifetime="12" >
+	</LifetimeComponent>
+
+</Entity>

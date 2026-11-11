@@ -1,0 +1,19 @@
+<Sprite
+ filename="mods/elemental_arts/files/projectiles_gfx/whirlwind.png"
+ offset_x="9.5"
+ offset_y="14.5"
+ default_animation="fly" >
+
+ <RectAnimation
+  name="fly"
+  pos_x="0"
+  pos_y="0"
+  frame_count="4"
+  frame_width="19"
+  frame_height="29"
+  frame_wait="0.06"
+  frames_per_row="4"
+  loop="1" >
+ </RectAnimation>
+
+</Sprite>
