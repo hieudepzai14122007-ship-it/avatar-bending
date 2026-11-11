@@ -88,6 +88,69 @@ local elemental_arts_actions =
 		end,
 	},
 
+	-- ICE ----------------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_GLACIAL_SHARDS",
+		name        = "Glacial Shards",
+		description = "A fan of three razor-sharp icicles that freeze enemies solid and turn water to ice",
+		sprite      = "mods/elemental_arts/files/ui_gfx/glacial_shards.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/freeze_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/glacial_shard.xml",3},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.7,0.9,0.8,0.6,0.4",
+		price = 170,
+		mana = 30,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/glacial_shard.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/glacial_shard.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/glacial_shard.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 14
+			c.spread_degrees = c.spread_degrees + 10.0
+		end,
+	},
+
+	-- WIND (utility) -----------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_UPDRAFT",
+		name        = "Updraft",
+		description = "A sudden column of rising air that launches you upwards and breaks your fall",
+		sprite      = "mods/elemental_arts/files/ui_gfx/updraft.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/levitation_field_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/updraft.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "0,1,2,3,4,5",
+		spawn_probability = "0.4,0.6,0.6,0.5,0.4,0.3",
+		price = 150,
+		mana = 35,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/updraft.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 40
+		end,
+	},
+
+	-- MAGMA (earth + fire) -----------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_MAGMA_BOMB",
+		name        = "Magma Bomb",
+		description = "A lobbed chunk of molten rock that explodes and spills a pool of lava. Keep your distance",
+		sprite      = "mods/elemental_arts/files/ui_gfx/magma_bomb.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/grenade_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/magma_bomb.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "2,3,4,5,6",
+		spawn_probability = "0.5,0.7,0.7,0.6,0.5",
+		price = 240,
+		mana = 70,
+		max_uses = 12,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/magma_bomb.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 45
+			c.screenshake = c.screenshake + 3.0
+			shot_effects.recoil_knockback = shot_effects.recoil_knockback + 40.0
+		end,
+	},
+
 	-- ALL FOUR -----------------------------------------------------------
 	{
 		id          = "ELEMENTAL_ARTS_ATTUNEMENT",

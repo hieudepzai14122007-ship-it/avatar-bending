@@ -1,5 +1,5 @@
 -- Elemental Arts - Spell Expansion
--- Adds five elemental spells to the spell pool.
+-- Adds eight elemental spells to the spell pool.
 
 local MOD_ID = "elemental_arts"
 
@@ -12,6 +12,9 @@ local STARTER_SPELLS =
 	"ELEMENTAL_ARTS_TIDAL_ORB",
 	"ELEMENTAL_ARTS_STONE_LANCE",
 	"ELEMENTAL_ARTS_FLAME_SERPENT",
+	"ELEMENTAL_ARTS_GLACIAL_SHARDS",
+	"ELEMENTAL_ARTS_UPDRAFT",
+	"ELEMENTAL_ARTS_MAGMA_BOMB",
 	"ELEMENTAL_ARTS_ATTUNEMENT",
 }
 
@@ -36,7 +39,10 @@ function OnPlayerSpawned( player_entity )
 		return
 	end
 
+	-- Lay the spells out in a row centred on the player.
+	local spacing = 14
+	local first_x = x - ( #STARTER_SPELLS - 1 ) * spacing * 0.5
 	for i, action_id in ipairs( STARTER_SPELLS ) do
-		CreateItemActionEntity( action_id, x - 40 + i * 16, y - 12 )
+		CreateItemActionEntity( action_id, first_x + ( i - 1 ) * spacing, y - 12 )
 	end
 end

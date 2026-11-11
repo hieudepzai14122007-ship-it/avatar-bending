@@ -151,6 +151,68 @@ def icons():
         "................",
     ], fire).save(os.path.join(UI, "flame_serpent.png"))
 
+    ice = {".": T, "w": (240, 250, 255, 255), "l": (160, 220, 255, 255), "b": (80, 160, 235, 255),
+           "d": (40, 96, 180, 255)}
+    from_rows([
+        "................",
+        "..........w.....",
+        ".........wl.....",
+        "........wlb..w..",
+        ".......wlbd.wl..",
+        "......wlbd.wlb..",
+        ".....wlbd.wlbd..",
+        "....wlbd.wlbd...",
+        "...wlbd.wlbd....",
+        "..wlbd.wlbd.....",
+        "..lbd.wlbd..w...",
+        "..bd.wlbd..wl...",
+        "....wlbd..wlb...",
+        "....lbd..wlbd...",
+        "....bd...lbd....",
+        "................",
+    ], ice).save(os.path.join(UI, "glacial_shards.png"))
+
+    up = {".": T, "w": (245, 250, 250, 255), "g": (176, 200, 204, 255), "d": (110, 136, 146, 255)}
+    from_rows([
+        "................",
+        ".......ww.......",
+        "......wwww......",
+        ".....wwwwww.....",
+        "....wwgwwgww....",
+        "...ww.gwwg.ww...",
+        "......gwwg......",
+        "..d...gwwg...d..",
+        "..g...gwwg...g..",
+        "..g...gwwg...g..",
+        "..d...dggd...d..",
+        "................",
+        "....d......d....",
+        "....g..dd..g....",
+        "....d..gg..d....",
+        "................",
+    ], up).save(os.path.join(UI, "updraft.png"))
+
+    magma = {".": T, "k": (52, 40, 38, 255), "m": (96, 70, 60, 255), "r": (226, 70, 24, 255),
+             "o": (255, 160, 40, 255), "y": (255, 240, 150, 255)}
+    from_rows([
+        "................",
+        "..........o.....",
+        ".....o...oy.....",
+        "......mmmmo.....",
+        "....mmmmrmmm....",
+        "...mmmrromkmm...",
+        "...mmrroymmkk...",
+        "..mmmmroyormkk..",
+        "..mmrmmoyrrmkk..",
+        "..mrrommormkkk..",
+        "..mmroyrmmkkkk..",
+        "...mmoormkkkk...",
+        "...mkmrmkkkkk...",
+        "....kkkkkkkk....",
+        "......kkkk......",
+        "................",
+    ], magma).save(os.path.join(UI, "magma_bomb.png"))
+
     # Elemental Attunement: four quadrants around a bright core.
     img = Image.new("RGBA", (16, 16), T)
     quads = {
@@ -274,6 +336,45 @@ def flame_serpent():
     save_sheet("flame_serpent", frames, 0.05, 9.0, 4.5)
 
 
+def glacial_shard():
+    """A slim icicle pointing right (the flight direction)."""
+    pal = {".": T, "w": (240, 250, 255, 255), "l": (160, 220, 255, 255), "b": (80, 160, 235, 255)}
+    img = from_rows([
+        "..bllllww....",
+        "bllllwwwwwwww",
+        "..bbblll.....",
+    ], pal)
+    save_sheet("glacial_shard", [img], 0.2, 6.5, 1.5)
+
+
+def magma_bomb():
+    """A dark rock whose glowing cracks pulse."""
+    s, n = 11, 4
+    frames = []
+    for f in range(n):
+        img = Image.new("RGBA", (s, s), T)
+        glow = 0.5 + 0.5 * math.sin(f * math.pi / 2)
+        for y in range(s):
+            for x in range(s):
+                d = math.hypot(x - 5, y - 5)
+                if d > 5.2:
+                    continue
+                crack = math.sin(x * 1.7 + y * 0.6) * math.cos(y * 1.3 - x * 0.4)
+                if d < 1.8 + glow:
+                    col = (255, 240, 150, 255)
+                elif crack > 0.45:
+                    col = (255, int(120 + 70 * glow), 30, 255)
+                elif crack > 0.2:
+                    col = (226, 70, 24, 255)
+                elif d > 4.2:
+                    col = (52, 40, 38, 255)
+                else:
+                    col = (96, 70, 60, 255)
+                img.putpixel((x, y), col)
+        frames.append(img)
+    save_sheet("magma_bomb", frames, 0.08, 5.5, 5.5)
+
+
 if __name__ == "__main__":
     os.makedirs(UI, exist_ok=True)
     os.makedirs(GFX, exist_ok=True)
@@ -282,4 +383,6 @@ if __name__ == "__main__":
     tidal_orb()
     stone_lance()
     flame_serpent()
+    glacial_shard()
+    magma_bomb()
     print("wrote", sorted(os.listdir(UI)), sorted(os.listdir(GFX)))
