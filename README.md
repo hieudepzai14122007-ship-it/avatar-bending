@@ -156,7 +156,7 @@ python3 tools/gen_sounds.py      # regenerate the sound effects (needs numpy, sc
 
 ## Also in this repository: a Noita spell mod
 
-[`noita/`](noita/README.md) holds **Elemental Arts**, a separate mod for the game Noita that adds eighteen elemental spells. It is independent of the Minecraft mod above. See [its README](noita/README.md) for the spells and install steps.
+[`noita/`](noita/README.md) holds **Elemental Arts**, a separate mod for the game Noita that adds twenty-three elemental spells. It is independent of the Minecraft mod above. See [its README](noita/README.md) for the spells and install steps.
 
 ---
 

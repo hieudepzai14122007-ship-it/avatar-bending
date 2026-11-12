@@ -1,0 +1,19 @@
+<Sprite
+ filename="mods/elemental_arts/files/projectiles_gfx/frost_sentinel.png"
+ offset_x="3.5"
+ offset_y="6.0"
+ default_animation="fly" >
+
+ <RectAnimation
+  name="fly"
+  pos_x="0"
+  pos_y="0"
+  frame_count="4"
+  frame_width="7"
+  frame_height="12"
+  frame_wait="0.15"
+  frames_per_row="4"
+  loop="1" >
+ </RectAnimation>
+
+</Sprite>

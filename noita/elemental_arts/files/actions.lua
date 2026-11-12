@@ -371,6 +371,103 @@ local elemental_arts_actions =
 		end,
 	},
 
+	-- FIRE (orbit) -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_EMBER_HALO",
+		name        = "Ember Halo",
+		description = "Three embers circle you for a few seconds, burning any enemy that comes close",
+		sprite      = "mods/elemental_arts/files/ui_gfx/ember_halo.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/fireball_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/ember_halo_ember.xml",3},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.4,0.6,0.6,0.5,0.4",
+		price = 200,
+		mana = 55,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/ember_halo_cast.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+		end,
+	},
+
+	-- WATER (pull) -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_RIPTIDE",
+		name        = "Riptide",
+		description = "A bolt of water that seizes the enemy it hits and drags it to you",
+		sprite      = "mods/elemental_arts/files/ui_gfx/riptide.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/material_water_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/riptide.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.5,0.7,0.7,0.5,0.4",
+		price = 170,
+		mana = 25,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/riptide.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 16
+		end,
+	},
+
+	-- EARTH (slam) -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_EARTHSHAKER",
+		name        = "Earthshaker",
+		description = "Hurls you straight down. Where you land, a shockwave blasts everything around you",
+		sprite      = "mods/elemental_arts/files/ui_gfx/earthshaker.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/explosion_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/earthshaker_shockwave.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4,5,6",
+		spawn_probability = "0.4,0.6,0.6,0.6,0.5,0.4",
+		price = 230,
+		mana = 60,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/earthshaker.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 40
+		end,
+	},
+
+	-- ICE (turret) -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_FROST_SENTINEL",
+		name        = "Frost Sentinel",
+		description = "An ice crystal that hangs in the air for a while and fires icicles at nearby enemies on its own",
+		sprite      = "mods/elemental_arts/files/ui_gfx/frost_sentinel.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/freeze_field_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/frost_sentinel.xml"},
+		type        = ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level       = "2,3,4,5,6",
+		spawn_probability = "0.5,0.6,0.7,0.6,0.5",
+		price = 280,
+		mana = 90,
+		max_uses = 12,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/frost_sentinel.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 35
+		end,
+	},
+
+	-- ICE (modifier) -----------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_SHATTER",
+		name        = "Shatter",
+		description = "The projectile always lands a critical hit on frozen enemies, and deals a little ice damage",
+		sprite      = "mods/elemental_arts/files/ui_gfx/shatter.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/freeze_unidentified.png",
+		related_extra_entities = { "mods/elemental_arts/files/entities/misc/hitfx_shatter.xml" },
+		type        = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.4,0.6,0.6,0.5,0.4",
+		price = 150,
+		mana = 10,
+		action = function()
+			c.extra_entities = c.extra_entities .. "mods/elemental_arts/files/entities/misc/hitfx_shatter.xml,"
+			c.damage_ice_add = c.damage_ice_add + 0.1
+			draw_actions( 1, true )
+		end,
+	},
+
 	-- ALL FOUR -----------------------------------------------------------
 	{
 		id          = "ELEMENTAL_ARTS_ATTUNEMENT",

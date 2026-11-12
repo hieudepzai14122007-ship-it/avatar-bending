@@ -1,5 +1,5 @@
 -- Elemental Arts - Spell Expansion
--- Adds eighteen elemental spells to the spell pool.
+-- Adds twenty-three elemental spells to the spell pool.
 
 local MOD_ID = "elemental_arts"
 
@@ -25,6 +25,11 @@ local STARTER_SPELLS =
 	"ELEMENTAL_ARTS_CRESCENT_GALE",
 	"ELEMENTAL_ARTS_BUBBLE_PRISON",
 	"ELEMENTAL_ARTS_GATHERING_STORM",
+	"ELEMENTAL_ARTS_EMBER_HALO",
+	"ELEMENTAL_ARTS_RIPTIDE",
+	"ELEMENTAL_ARTS_EARTHSHAKER",
+	"ELEMENTAL_ARTS_FROST_SENTINEL",
+	"ELEMENTAL_ARTS_SHATTER",
 	"ELEMENTAL_ARTS_ATTUNEMENT",
 }
 

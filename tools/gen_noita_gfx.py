@@ -392,6 +392,110 @@ def icons():
         "................",
     ], storm).save(os.path.join(UI, "gathering_storm.png"))
 
+    # Ember Halo: three embers on a faint ring around a small figure.
+    img = Image.new("RGBA", (16, 16), T)
+    for a in range(0, 360, 6):
+        px = int(round(7.5 + math.cos(math.radians(a)) * 6.0))
+        py = int(round(7.5 + math.sin(math.radians(a)) * 6.0))
+        img.putpixel((px, py), (140, 60, 30, 255))
+    for a in (-90, 30, 150):
+        cx = 7.5 + math.cos(math.radians(a)) * 6.0
+        cy = 7.5 + math.sin(math.radians(a)) * 6.0
+        for y in range(16):
+            for x in range(16):
+                d = math.hypot(x - cx, y - cy)
+                if d <= 1.0:
+                    img.putpixel((x, y), (255, 240, 150, 255))
+                elif d <= 2.1:
+                    img.putpixel((x, y), (255, 150, 40, 255))
+    for px, py in ((7, 6), (8, 6), (7, 7), (8, 7), (7, 8), (8, 8), (7, 9), (8, 9)):
+        img.putpixel((px, py), (190, 170, 150, 255))
+    img.save(os.path.join(UI, "ember_halo.png"))
+
+    rip = {".": T, "h": (190, 232, 255, 255), "l": (92, 170, 255, 255), "b": (36, 104, 226, 255),
+           "d": (20, 62, 160, 255), "k": (150, 130, 96, 255)}
+    from_rows([
+        "................",
+        "................",
+        "..........hll...",
+        "........hllbbl..",
+        "......hllbb..bl.",
+        "....hllbb.....b.",
+        "..hhlbb.....kkb.",
+        ".hllb......kkkb.",
+        "..hhlbb.....kkb.",
+        "....hllbb.....b.",
+        "......hllbb..bd.",
+        "........hllbbd..",
+        "..........ldd...",
+        "................",
+        "................",
+        "................",
+    ], rip).save(os.path.join(UI, "riptide.png"))
+
+    quake = {".": T, "h": (214, 196, 150, 255), "m": (150, 130, 96, 255), "d": (92, 78, 60, 255),
+             "k": (58, 50, 42, 255), "y": (255, 232, 120, 255), "w": (255, 255, 235, 255)}
+    from_rows([
+        "................",
+        ".......ww.......",
+        ".......ww.......",
+        "......wyyw......",
+        "......wyyw......",
+        ".....hhmmdd.....",
+        ".....hmmmdd.....",
+        "......mmdd......",
+        ".y.....dd.....y.",
+        "..y..........y..",
+        "y..y.y.yy.y.y..y",
+        ".hhhmmm..mmmddd.",
+        "hhmmmmm.k.mmmmdd",
+        "mmmmmdd.kk.mmddd",
+        "ddddddk.kkk.dddk",
+        "................",
+    ], quake).save(os.path.join(UI, "earthshaker.png"))
+
+    sent = {".": T, "w": (240, 250, 255, 255), "l": (160, 220, 255, 255), "b": (80, 160, 235, 255),
+            "d": (40, 96, 180, 255)}
+    from_rows([
+        "................",
+        ".......w........",
+        "......wwl.......",
+        ".....wwllb......",
+        ".....wllbb...l..",
+        "....wwllbbd.....",
+        "....wllbbbd..w.l",
+        "....wllbbbd.....",
+        "....wllbbbd..l..",
+        ".....llbbd......",
+        ".....lbbdd..w...",
+        "......bbd.......",
+        ".......d......l.",
+        "................",
+        "....ddddddd.....",
+        "................",
+    ], sent).save(os.path.join(UI, "frost_sentinel.png"))
+
+    shat = {".": T, "w": (240, 250, 255, 255), "l": (160, 220, 255, 255), "b": (80, 160, 235, 255),
+            "d": (40, 96, 180, 255), "k": (20, 40, 90, 255)}
+    from_rows([
+        "................",
+        "..w..........l..",
+        "....wwwlll......",
+        "...wwwlkllbb....",
+        "..wwwllkklbbb.w.",
+        "..wwlllkllbbbd..",
+        "..wlkkkkkkkbbd..",
+        "..wlllkklbkbdd..",
+        "..llllklbbbkdd..",
+        "..lllkkbbbbddd..",
+        "...lbkbbbbddd...",
+        "....bkbbdddd....",
+        ".l....dddd...b..",
+        "...b..........w.",
+        "................",
+        "................",
+    ], shat).save(os.path.join(UI, "shatter.png"))
+
     # Elemental Attunement: four quadrants around a bright core.
     img = Image.new("RGBA", (16, 16), T)
     quads = {
@@ -694,6 +798,62 @@ def gathering_storm():
     save_sheet("gathering_storm", [a, b], 0.04, 6.5, 2.5)
 
 
+def ember_halo():
+    """A small round ember that flickers."""
+    frames = []
+    for f in range(2):
+        img = Image.new("RGBA", (7, 7), T)
+        for y in range(7):
+            for x in range(7):
+                d = math.hypot(x - 3, y - 3)
+                if d <= 1.1 + 0.4 * f:
+                    img.putpixel((x, y), (255, 255, 235, 255))
+                elif d <= 2.2:
+                    img.putpixel((x, y), (255, 190, 60, 255))
+                elif d <= 3.2 and (x + y + f) % 2 == 0:
+                    img.putpixel((x, y), (226, 80, 24, 255))
+        frames.append(img)
+    save_sheet("ember_halo", frames, 0.07, 3.5, 3.5)
+
+
+def riptide():
+    """A hooked bolt of water pointing right."""
+    pal = {".": T, "h": (190, 232, 255, 255), "l": (92, 170, 255, 255), "b": (36, 104, 226, 255)}
+    img = from_rows([
+        ".........lb..",
+        "..bbllllhhlb.",
+        "bllllhhhhhhlb",
+        "..bbllllhhlb.",
+        ".........lb..",
+    ], pal)
+    save_sheet("riptide", [img], 0.2, 6.5, 2.5)
+
+
+def frost_sentinel():
+    """An upright ice crystal that glints."""
+    pal = {".": T, "w": (240, 250, 255, 255), "l": (160, 220, 255, 255), "b": (80, 160, 235, 255),
+           "d": (40, 96, 180, 255)}
+    rows = [
+        "...w...",
+        "..wwl..",
+        ".wwllb.",
+        ".wllbb.",
+        "wwllbbd",
+        "wllbbbd",
+        "wllbbbd",
+        "wllbbbd",
+        ".llbbd.",
+        ".lbbdd.",
+        "..bbd..",
+        "...d...",
+    ]
+    a = from_rows(rows, pal)
+    b = a.copy()
+    for x, y in ((1, 3), (2, 2), (1, 5)):
+        b.putpixel((x, y), (255, 255, 255, 255))
+    save_sheet("frost_sentinel", [a, a, a, b], 0.15, 3.5, 6.0)
+
+
 if __name__ == "__main__":
     os.makedirs(UI, exist_ok=True)
     os.makedirs(GFX, exist_ok=True)
@@ -712,4 +872,7 @@ if __name__ == "__main__":
     bubble("bubble_prison", 9, 0.1)
     bubble("bubble_prison_big", 23, 0.12)
     gathering_storm()
+    ember_halo()
+    riptide()
+    frost_sentinel()
     print("wrote", sorted(os.listdir(UI)), sorted(os.listdir(GFX)))

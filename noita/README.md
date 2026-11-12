@@ -1,8 +1,8 @@
 # Elemental Arts: a spell expansion for Noita
 
-A mod for [Noita](https://noitagame.com/) that adds eighteen new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
+A mod for [Noita](https://noitagame.com/) that adds twenty-three new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
 
-![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Thunderstrike](elemental_arts/files/ui_gfx/thunderstrike.png) ![Frost Nova](elemental_arts/files/ui_gfx/frost_nova.png) ![Fire Pillar](elemental_arts/files/ui_gfx/fire_pillar.png) ![Gale Barrier](elemental_arts/files/ui_gfx/gale_barrier.png) ![Quagmire](elemental_arts/files/ui_gfx/quagmire.png) ![Waystone](elemental_arts/files/ui_gfx/waystone.png) ![Avalanche](elemental_arts/files/ui_gfx/avalanche.png) ![Crescent Gale](elemental_arts/files/ui_gfx/crescent_gale.png) ![Bubble Prison](elemental_arts/files/ui_gfx/bubble_prison.png) ![Gathering Storm](elemental_arts/files/ui_gfx/gathering_storm.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
+![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Thunderstrike](elemental_arts/files/ui_gfx/thunderstrike.png) ![Frost Nova](elemental_arts/files/ui_gfx/frost_nova.png) ![Fire Pillar](elemental_arts/files/ui_gfx/fire_pillar.png) ![Gale Barrier](elemental_arts/files/ui_gfx/gale_barrier.png) ![Quagmire](elemental_arts/files/ui_gfx/quagmire.png) ![Waystone](elemental_arts/files/ui_gfx/waystone.png) ![Avalanche](elemental_arts/files/ui_gfx/avalanche.png) ![Crescent Gale](elemental_arts/files/ui_gfx/crescent_gale.png) ![Bubble Prison](elemental_arts/files/ui_gfx/bubble_prison.png) ![Gathering Storm](elemental_arts/files/ui_gfx/gathering_storm.png) ![Ember Halo](elemental_arts/files/ui_gfx/ember_halo.png) ![Riptide](elemental_arts/files/ui_gfx/riptide.png) ![Earthshaker](elemental_arts/files/ui_gfx/earthshaker.png) ![Frost Sentinel](elemental_arts/files/ui_gfx/frost_sentinel.png) ![Shatter](elemental_arts/files/ui_gfx/shatter.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
 
 ## The spells
 
@@ -25,6 +25,11 @@ A mod for [Noita](https://noitagame.com/) that adds eighteen new elemental spell
 | **Crescent Gale** | Projectile | 30 | A blade of wind that cuts through enemies (12.5 slice damage per hit), flies about 130 pixels, then curves around and returns to you, cutting them again on the way back. It bounces off walls. |
 | **Bubble Prison** | Projectile | 30 | A drifting bubble. The first enemy it touches is sealed inside and carried upwards for 3 seconds, feet off the ground, then dropped. It also soaks the enemy. Barely any damage; it is for taking a dangerous enemy out of the fight. |
 | **Gathering Storm** | Projectile | 35 | A bolt that charges while the spell rests. It always deals 7.5 electric damage, plus up to 45 more depending on how long ago you last cast it: nothing in the first third of a second, the full bonus after 4 seconds. Rapid fire wastes it; a patient shot hits very hard. |
+| **Ember Halo** | Utility | 55 | Three embers circle you for 7 seconds, about 24 pixels out. Each deals 6 fire damage to an enemy it passes through and sets it alight. The embers pass through walls and do not burn you. |
+| **Riptide** | Projectile | 25 | A bolt of water that deals 7.5 damage, soaks its target, then drags it towards you for 0.8 seconds. Use it to pull an enemy off a ledge, out of cover, or into a trap you have laid. |
+| **Earthshaker** | Utility | 60 | Hurls you straight down. The moment you land, a shockwave deals 40 damage to everything within 34 pixels and throws loose objects about. It does not hurt you and does not break the ground. Cast while standing, it is a plain stomp. |
+| **Frost Sentinel** | Static projectile | 90 | An ice crystal that drifts a short way from the wand and hangs there for 8 seconds, 12 uses. About three times a second it fires an icicle (7.5 ice damage, brief freeze) at the nearest enemy within 170 pixels that it has a clear line to. |
+| **Shatter** | Modifier | 10 | The projectile always lands a critical hit on frozen enemies and gains 2.5 ice damage. Pairs with Frost Nova, Glacial Shards, Avalanche and Frost Sentinel. |
 | **Elemental Attunement** | Modifier | 12 | Each cast infuses the projectile with the next element in a fixed cycle: **air** (60% faster, more accurate, strong knockback), **water** (soaks the target, always crits soaked targets, leaves a water trail), **earth** (+10 damage, +15% crit chance, 15% slower), **fire** (+6 fire damage, ignites the target, leaves a fire trail). |
 
 For reference, the starting Spark Bolt deals 3 damage.
@@ -33,7 +38,7 @@ Stone Lance and Flame Serpent start their stone and fire a short distance from t
 
 ## Install
 
-1. Download [`release/ElementalArts-1.3.0-Noita.zip`](../release/ElementalArts-1.3.0-Noita.zip) and unzip it.
+1. Download [`release/ElementalArts-1.4.0-Noita.zip`](../release/ElementalArts-1.4.0-Noita.zip) and unzip it.
 2. Copy the `elemental_arts` folder into the `mods` folder of your Noita install. On Steam: right-click Noita → **Manage → Browse local files**, then open `mods`.
    The folder must keep the name `elemental_arts`, because the mod loads its files by that path.
 3. Start Noita, open **Mods**, and enable **Elemental Arts - Spell Expansion**.
@@ -53,7 +58,7 @@ In **Mods → Mod settings**:
 
 ## Status
 
-The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the nine spell scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
+The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the fourteen spell scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
 
 ## Files
 
@@ -63,10 +68,10 @@ elemental_arts/
   init.lua                      registers the spells, drops the starter spells
   settings.lua                  the mod setting
   files/
-    actions.lua                 the eighteen spell definitions
+    actions.lua                 the twenty-three spell definitions
     entities/projectiles/       the projectiles, plus what they leave behind (splashes, the fire column)
-    entities/misc/              the waystone and the bubble that holds a trapped enemy
-    scripts/                    one script per spell that needs one (nine in all)
+    entities/misc/              the waystone, and the effects attached to enemies (bubble, riptide, shatter)
+    scripts/                    the scripts behind the spells that need one (fourteen in all)
     ui_gfx/                     spell icons
     projectiles_gfx/            projectile sprites
 ```
