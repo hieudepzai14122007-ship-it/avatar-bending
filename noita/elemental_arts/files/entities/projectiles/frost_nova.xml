@@ -1,0 +1,153 @@
+<!-- Frost Nova: a short burst of cold centred on where it was cast. -->
+<Entity name="$projectile_default" tags="projectile_player" >
+
+	<Base file="data/entities/base_projectile.xml" >
+		<VelocityComponent
+			gravity_y="0"
+			mass="0.04"
+			>
+		</VelocityComponent>
+	</Base>
+
+	<ProjectileComponent
+		_enabled="1"
+		lob_min="0.8"
+		lob_max="1.0"
+		speed_min="0"
+		speed_max="0"
+		direction_random_rad="0"
+		on_death_explode="0"
+		on_death_gfx_leave_sprite="0"
+		on_lifetime_out_explode="0"
+		explosion_dont_damage_shooter="1"
+		on_collision_die="0"
+		die_on_liquid_collision="0"
+		die_on_low_velocity="0"
+		velocity_sets_scale="0"
+		velocity_sets_rotation="0"
+		lifetime="20"
+		damage="0"
+		ragdoll_force_multiplier="0.0"
+		hit_particle_force_multiplier="0.0"
+		camera_shake_when_shot="4.0"
+		bounces_left="0"
+		muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_magic_launcher_large_blue.xml"
+		shoot_light_flash_r="10"
+		shoot_light_flash_g="140"
+		shoot_light_flash_b="255"
+		shoot_light_flash_radius="150"
+		knockback_force="0.0"
+		physics_impulse_coeff="0"
+		penetrate_entities="1"
+		penetrate_world="1"
+		>
+		<config_explosion />
+	</ProjectileComponent>
+
+	<!-- Freezes every enemy in reach, once. -->
+	<LuaComponent
+		script_source_file="mods/elemental_arts/files/scripts/frost_nova.lua"
+		execute_every_n_frame="1"
+		remove_after_executed="1"
+		>
+	</LuaComponent>
+
+	<!-- Cold damage to enemies inside the burst while it lasts. -->
+	<AreaDamageComponent
+		aabb_min.x="-72"
+		aabb_min.y="-72"
+		aabb_max.x="72"
+		aabb_max.y="72"
+		circle_radius="72"
+		damage_per_frame="0.03"
+		update_every_n_frame="1"
+		entities_with_tag="enemy"
+		damage_type="DAMAGE_ICE"
+		>
+	</AreaDamageComponent>
+
+	<!-- Water of any kind turns to ice, lava hardens to rock. -->
+	<MagicConvertMaterialComponent
+		from_material_tag="[water]"
+		to_material="ice_static"
+		steps_per_frame="6"
+		loop="0"
+		is_circle="1"
+		radius="64" >
+	</MagicConvertMaterialComponent>
+
+	<MagicConvertMaterialComponent
+		from_material_tag="[lava]"
+		to_material="rock_static"
+		steps_per_frame="6"
+		loop="0"
+		is_circle="1"
+		radius="64" >
+	</MagicConvertMaterialComponent>
+
+	<!-- The expanding ring of frost. -->
+	<ParticleEmitterComponent
+		emitted_material_name="spark_white"
+		gravity.y="0.0"
+		lifetime_min="0.4"
+		lifetime_max="1.0"
+		count_min="30"
+		count_max="40"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.min="6"
+		area_circle_radius.max="14"
+		cosmetic_force_create="0"
+		velocity_always_away_from_center="250"
+		airflow_force="0.1"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		create_real_particles="0"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<ParticleEmitterComponent
+		emitted_material_name="spark_blue"
+		gravity.y="20.0"
+		lifetime_min="0.6"
+		lifetime_max="1.6"
+		count_min="6"
+		count_max="10"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		area_circle_radius.min="0"
+		area_circle_radius.max="70"
+		cosmetic_force_create="0"
+		airflow_force="0.3"
+		airflow_time="0.01"
+		airflow_scale="0.05"
+		emission_interval_min_frames="1"
+		emission_interval_max_frames="1"
+		emit_cosmetic_particles="1"
+		create_real_particles="0"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<LightComponent
+		_enabled="1"
+		radius="140"
+		r="120"
+		g="200"
+		b="255" >
+	</LightComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="player_projectiles/circle_of">
+	</AudioComponent>
+
+	<VariableStorageComponent
+		name="projectile_file"
+		value_string="mods/elemental_arts/files/entities/projectiles/frost_nova.xml"
+		>
+	</VariableStorageComponent>
+
+</Entity>

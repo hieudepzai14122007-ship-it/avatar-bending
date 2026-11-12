@@ -1,8 +1,8 @@
 # Elemental Arts: a spell expansion for Noita
 
-A mod for [Noita](https://noitagame.com/) that adds eight new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
+A mod for [Noita](https://noitagame.com/) that adds thirteen new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
 
-![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
+![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Thunderstrike](elemental_arts/files/ui_gfx/thunderstrike.png) ![Frost Nova](elemental_arts/files/ui_gfx/frost_nova.png) ![Fire Pillar](elemental_arts/files/ui_gfx/fire_pillar.png) ![Gale Barrier](elemental_arts/files/ui_gfx/gale_barrier.png) ![Quagmire](elemental_arts/files/ui_gfx/quagmire.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
 
 ## The spells
 
@@ -15,6 +15,11 @@ A mod for [Noita](https://noitagame.com/) that adds eight new elemental spells t
 | **Glacial Shards** | Projectile | 30 | A fan of three fast icicles. Each deals 7.5 ice damage, freezes the enemy it hits for a moment, and turns any water it touches to ice. |
 | **Updraft** | Utility | 35 | A column of rising air that launches you straight up for a quarter of a second and cancels any fall. Good for reaching ledges and for getting out of trouble. It also lifts an enemy that casts it. |
 | **Magma Bomb** | Projectile | 70 | A lobbed chunk of molten rock, 12 uses. It deals 20 damage on a direct hit, explodes for 30 more, breaks soft terrain and spills a small pool of real lava. The lava hurts you as much as anything else. |
+| **Thunderstrike** | Projectile | 80 | A fast spark that marks a spot. Where it hits, a bolt of the game's own lightning falls from the ceiling above, or from 140 pixels up in the open. The lightning hurts you too if you stand next to the target, and it electrifies water. |
+| **Frost Nova** | Static projectile | 60 | A burst of cold around the point of casting, 15 uses. Enemies within 72 pixels are frozen for 2 seconds and take about 15 ice damage. Water turns to ice and lava hardens to rock. You are not frozen. |
+| **Fire Pillar** | Projectile | 40 | A lobbed ember that erupts into a column of real fire about 80 pixels tall for nearly 2 seconds. Enemies in the column take about 18 fire damage per second and catch fire. Good for blocking a corridor. |
+| **Gale Barrier** | Utility | 60 | A ring of wind that follows you for 4 seconds, 12 uses. Enemy projectiles that fly into it are bounced back out, and enemies that come close are pushed away. It does not stop explosions, melee hits or hazards such as fire and acid. |
+| **Quagmire** | Modifier | 8 | The projectile leaves a trail of mud and bogs down what it hits: the target moves much slower for 10 seconds. Adds 2.5 damage. |
 | **Elemental Attunement** | Modifier | 12 | Each cast infuses the projectile with the next element in a fixed cycle: **air** (60% faster, more accurate, strong knockback), **water** (soaks the target, always crits soaked targets, leaves a water trail), **earth** (+10 damage, +15% crit chance, 15% slower), **fire** (+6 fire damage, ignites the target, leaves a fire trail). |
 
 For reference, the starting Spark Bolt deals 3 damage.
@@ -23,7 +28,7 @@ Stone Lance and Flame Serpent start their stone and fire a short distance from t
 
 ## Install
 
-1. Download [`release/ElementalArts-1.1.0-Noita.zip`](../release/ElementalArts-1.1.0-Noita.zip) and unzip it.
+1. Download [`release/ElementalArts-1.2.0-Noita.zip`](../release/ElementalArts-1.2.0-Noita.zip) and unzip it.
 2. Copy the `elemental_arts` folder into the `mods` folder of your Noita install. On Steam: right-click Noita → **Manage → Browse local files**, then open `mods`.
    The folder must keep the name `elemental_arts`, because the mod loads its files by that path.
 3. Start Noita, open **Mods**, and enable **Elemental Arts - Spell Expansion**.
@@ -43,7 +48,7 @@ In **Mods → Mod settings**:
 
 ## Status
 
-The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the Whirlwind and Updraft scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
+The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the five spell scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
 
 ## Files
 
@@ -53,10 +58,9 @@ elemental_arts/
   init.lua                      registers the spells, drops the starter spells
   settings.lua                  the mod setting
   files/
-    actions.lua                 the eight spell definitions
-    entities/projectiles/       one projectile per spell, plus the water and lava splashes
-    scripts/whirlwind.lua       the vortex pull
-    scripts/updraft.lua         the upward launch
+    actions.lua                 the thirteen spell definitions
+    entities/projectiles/       the projectiles, plus what they leave behind (splashes, the fire column)
+    scripts/                    whirlwind, updraft, thunderstrike, frost_nova, gale_barrier
     ui_gfx/                     spell icons
     projectiles_gfx/            projectile sprites
 ```

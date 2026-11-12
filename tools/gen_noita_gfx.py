@@ -213,6 +213,99 @@ def icons():
         "................",
     ], magma).save(os.path.join(UI, "magma_bomb.png"))
 
+    bolt = {".": T, "w": (255, 255, 235, 255), "y": (255, 232, 90, 255), "o": (240, 170, 40, 255),
+            "c": (150, 160, 176, 255), "d": (96, 104, 122, 255)}
+    from_rows([
+        "................",
+        "....cccccccc....",
+        "..ccccccccccdd..",
+        ".cccccccccccddd.",
+        "..dddcccddddd...",
+        "........yy......",
+        ".......yww......",
+        "......ywwy......",
+        ".....ywwwyyy....",
+        "....yyyywwy.....",
+        ".......wwy......",
+        "......ywy.......",
+        ".....ywo........",
+        ".....yo.........",
+        "....oo..........",
+        "................",
+    ], bolt).save(os.path.join(UI, "thunderstrike.png"))
+
+    # Frost Nova: an eight-pointed snowflake burst.
+    img = Image.new("RGBA", (16, 16), T)
+    for i in range(1, 8):
+        col = (240, 250, 255, 255) if i < 4 else ((160, 220, 255, 255) if i < 6 else (80, 160, 235, 255))
+        for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            for ox, oy in ((0, 0), (-1, 0), (0, -1), (-1, -1)):
+                img.putpixel((8 + ox + dx * i - (dx > 0) * 0, 8 + oy + dy * i), col)
+        if i < 6:
+            for dx, dy in ((1, 1), (-1, 1), (1, -1), (-1, -1)):
+                px = 7 + (dx > 0) + dx * (i - 1) if i > 0 else 7
+                py = 7 + (dy > 0) + dy * (i - 1) if i > 0 else 7
+                img.putpixel((px, py), col)
+    img.save(os.path.join(UI, "frost_nova.png"))
+
+    pillar = {".": T, "y": (255, 240, 150, 255), "o": (255, 160, 40, 255), "r": (226, 70, 24, 255),
+              "d": (140, 30, 20, 255), "w": (255, 255, 235, 255), "k": (70, 56, 50, 255)}
+    from_rows([
+        "................",
+        ".......r........",
+        "......ror..r....",
+        "......roor......",
+        ".....rooor......",
+        ".....royor......",
+        "....rroyoor.....",
+        "....royyyor.....",
+        "....roywyor.....",
+        "....roywyor.....",
+        "...rroywyorr....",
+        "...royywyyor....",
+        "...roywwwyor....",
+        "..drroywyorrd...",
+        ".kkkkkkkkkkkkk..",
+        "................",
+    ], pillar).save(os.path.join(UI, "fire_pillar.png"))
+
+    # Gale Barrier: a broken ring of wind around a small figure.
+    img = Image.new("RGBA", (16, 16), T)
+    for a in range(0, 360, 3):
+        if (a // 45) % 2 == 1 and a % 45 > 30:
+            continue  # gaps make the ring read as moving air
+        r = 6.4
+        px = int(round(7.5 + math.cos(math.radians(a)) * r))
+        py = int(round(7.5 + math.sin(math.radians(a)) * r))
+        img.putpixel((px, py), (245, 250, 250, 255) if a % 90 < 50 else (176, 200, 204, 255))
+    for px, py in ((7, 5), (8, 5), (7, 6), (8, 6)):
+        img.putpixel((px, py), (176, 200, 204, 255))
+    for py in range(7, 11):
+        for px in (7, 8):
+            img.putpixel((px, py), (110, 136, 146, 255))
+    img.save(os.path.join(UI, "gale_barrier.png"))
+
+    mud = {".": T, "h": (150, 120, 80, 255), "m": (104, 80, 52, 255), "d": (66, 50, 34, 255),
+           "k": (42, 32, 24, 255), "s": (190, 160, 110, 255)}
+    from_rows([
+        "................",
+        "................",
+        "......s.........",
+        ".....shm....s...",
+        ".....hmm........",
+        "..s...m...sh....",
+        "..........hmm...",
+        "...........m....",
+        "....hhhhhhhh....",
+        "..hhhmmmmmmmhh..",
+        ".hhmmmsmmmmmmmh.",
+        ".hmmmmmmmdmmmmd.",
+        ".mmmdmmmmmmmmdd.",
+        ".dmmmmmmddmmddk.",
+        "..dddddddddddk..",
+        "................",
+    ], mud).save(os.path.join(UI, "quagmire.png"))
+
     # Elemental Attunement: four quadrants around a bright core.
     img = Image.new("RGBA", (16, 16), T)
     quads = {
@@ -375,6 +468,47 @@ def magma_bomb():
     save_sheet("magma_bomb", frames, 0.08, 5.5, 5.5)
 
 
+def thunderstrike():
+    """A crackling spark pointing right, flickering between two shapes."""
+    pal = {".": T, "w": (255, 255, 235, 255), "y": (255, 232, 90, 255), "o": (240, 170, 40, 255)}
+    a = from_rows([
+        "..o......y...",
+        ".oyy..yywwy..",
+        "oyywwwwwwwwwy",
+        ".oyy..yywwy..",
+        "..o......y...",
+    ], pal)
+    b = from_rows([
+        "....y........",
+        "..oyy.yywwy.y",
+        "oyywwwwwwwwww",
+        "..oy..yywwy..",
+        ".o......y....",
+    ], pal)
+    save_sheet("thunderstrike", [a, b], 0.04, 6.5, 2.5)
+
+
+def fire_pillar():
+    """A small flickering ember pointing right."""
+    pal = {".": T, "w": (255, 255, 235, 255), "y": (255, 214, 90, 255), "o": (255, 140, 30, 255),
+           "r": (220, 60, 20, 255)}
+    a = from_rows([
+        "....rooo.",
+        ".rooyyyyo",
+        "rooyywwyo",
+        ".rooyyyyo",
+        "....rooo.",
+    ], pal)
+    b = from_rows([
+        "..r.rooo.",
+        "..royyyyo",
+        ".rooywwyo",
+        "rrooyyyyo",
+        "...rrooo.",
+    ], pal)
+    save_sheet("fire_pillar", [a, b], 0.06, 5.5, 2.5)
+
+
 if __name__ == "__main__":
     os.makedirs(UI, exist_ok=True)
     os.makedirs(GFX, exist_ok=True)
@@ -385,4 +519,6 @@ if __name__ == "__main__":
     flame_serpent()
     glacial_shard()
     magma_bomb()
+    thunderstrike()
+    fire_pillar()
     print("wrote", sorted(os.listdir(UI)), sorted(os.listdir(GFX)))

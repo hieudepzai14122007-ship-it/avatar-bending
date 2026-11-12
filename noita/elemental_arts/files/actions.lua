@@ -151,6 +151,108 @@ local elemental_arts_actions =
 		end,
 	},
 
+	-- LIGHTNING ----------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_THUNDERSTRIKE",
+		name        = "Thunderstrike",
+		description = "A fast spark that calls a bolt of lightning down from above onto whatever it hits",
+		sprite      = "mods/elemental_arts/files/ui_gfx/thunderstrike.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/lightning_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/thunderstrike.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "2,3,4,5,6",
+		spawn_probability = "0.5,0.7,0.7,0.6,0.5",
+		price = 250,
+		mana = 80,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/thunderstrike.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 40
+			c.spread_degrees = c.spread_degrees - 3.0
+		end,
+	},
+
+	-- ICE (burst) --------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_FROST_NOVA",
+		name        = "Frost Nova",
+		description = "A burst of cold around you that freezes nearby enemies, turns water to ice and hardens lava",
+		sprite      = "mods/elemental_arts/files/ui_gfx/frost_nova.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/freeze_field_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/frost_nova.xml"},
+		type        = ACTION_TYPE_STATIC_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.4,0.6,0.6,0.5,0.4",
+		price = 210,
+		mana = 60,
+		max_uses = 15,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/frost_nova.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+		end,
+	},
+
+	-- FIRE (area) --------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_FIRE_PILLAR",
+		name        = "Fire Pillar",
+		description = "An ember that erupts into a tall column of fire where it lands",
+		sprite      = "mods/elemental_arts/files/ui_gfx/fire_pillar.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/fire_blast_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/fire_pillar.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.6,0.8,0.7,0.6,0.4",
+		price = 190,
+		mana = 40,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/fire_pillar.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 28
+		end,
+	},
+
+	-- WIND (shield) ------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_GALE_BARRIER",
+		name        = "Gale Barrier",
+		description = "A ring of wind that follows you for a few seconds, throwing back enemy projectiles and pushing enemies away",
+		sprite      = "mods/elemental_arts/files/ui_gfx/gale_barrier.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/energy_shield_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/gale_barrier.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4,5,6",
+		spawn_probability = "0.3,0.5,0.6,0.6,0.5,0.4",
+		price = 230,
+		mana = 60,
+		max_uses = 12,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/gale_barrier.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+		end,
+	},
+
+	-- EARTH (modifier) ---------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_QUAGMIRE",
+		name        = "Quagmire",
+		description = "The projectile trails mud and bogs down whatever it hits, slowing it to a crawl",
+		sprite      = "mods/elemental_arts/files/ui_gfx/quagmire.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/slimeball_unidentified.png",
+		related_extra_entities = { "data/entities/particles/tinyspark_yellow.xml" },
+		type        = ACTION_TYPE_MODIFIER,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.5,0.6,0.6,0.5,0.4",
+		price = 130,
+		mana = 8,
+		action = function()
+			c.game_effect_entities = c.game_effect_entities .. "data/entities/misc/effect_movement_slower_2x.xml,"
+			c.trail_material = c.trail_material .. "mud,"
+			c.trail_material_amount = c.trail_material_amount + 10
+			c.damage_projectile_add = c.damage_projectile_add + 0.1
+			c.extra_entities = c.extra_entities .. "data/entities/particles/tinyspark_yellow.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+
 	-- ALL FOUR -----------------------------------------------------------
 	{
 		id          = "ELEMENTAL_ARTS_ATTUNEMENT",
