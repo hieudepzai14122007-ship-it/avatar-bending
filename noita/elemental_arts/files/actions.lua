@@ -468,6 +468,111 @@ local elemental_arts_actions =
 		end,
 	},
 
+	-- LIGHTNING (modifier) -----------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_FORKED_LIGHTNING",
+		name        = "Forked Lightning",
+		description = "When the projectile ends, bolts of lightning arc from it to the two nearest enemies",
+		sprite      = "mods/elemental_arts/files/ui_gfx/forked_lightning.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
+		related_extra_entities = { "mods/elemental_arts/files/entities/misc/forked_lightning.xml" },
+		type        = ACTION_TYPE_MODIFIER,
+		spawn_level       = "2,3,4,5,6",
+		spawn_probability = "0.4,0.6,0.6,0.5,0.4",
+		price = 240,
+		mana = 25,
+		action = function()
+			c.extra_entities = c.extra_entities .. "mods/elemental_arts/files/entities/misc/forked_lightning.xml,"
+			draw_actions( 1, true )
+		end,
+	},
+
+	-- EARTH (defence) ----------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_STONE_FORM",
+		name        = "Stone Form",
+		description = "Turn to living stone for a moment. Nothing can hurt you, but you cannot move",
+		sprite      = "mods/elemental_arts/files/ui_gfx/stone_form.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/energy_shield_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/stone_form_cast.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "2,3,4,5,6",
+		spawn_probability = "0.3,0.4,0.5,0.5,0.4",
+		price = 300,
+		mana = 80,
+		max_uses = 6,
+		never_unlimited = true,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/stone_form_cast.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 60
+		end,
+	},
+
+	-- WATER (push) -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_TIDAL_WAVE",
+		name        = "Tidal Wave",
+		description = "A rolling wave that passes through enemies and sweeps them along with it until it breaks",
+		sprite      = "mods/elemental_arts/files/ui_gfx/tidal_wave.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/sea_water_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/tidal_wave.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.5,0.7,0.7,0.6,0.4",
+		price = 200,
+		mana = 45,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/tidal_wave.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+			c.screenshake = c.screenshake + 1.5
+		end,
+	},
+
+	-- SMOKE (fire + air) -------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_SMOKE_VEIL",
+		name        = "Smoke Veil",
+		description = "Vanish in a puff of smoke. You are invisible for a few seconds",
+		sprite      = "mods/elemental_arts/files/ui_gfx/smoke_veil.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/teleport_projectile_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/smoke_veil_cast.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4,5,6",
+		spawn_probability = "0.3,0.5,0.5,0.5,0.4,0.4",
+		price = 220,
+		mana = 50,
+		max_uses = 10,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/smoke_veil_cast.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+		end,
+	},
+
+	-- FIVE AT ONCE -------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_ELEMENTAL_VOLLEY",
+		name        = "Elemental Volley",
+		description = "Looses five projectiles at once, one each of fire, water, ice, lightning and wind",
+		sprite      = "mods/elemental_arts/files/ui_gfx/elemental_volley.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/scatter_4_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/flame_serpent.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "3,4,5,6",
+		spawn_probability = "0.4,0.6,0.6,0.5",
+		price = 320,
+		mana = 110,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/flame_serpent.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/riptide.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/glacial_shard.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/gathering_storm.xml")
+			add_projectile("mods/elemental_arts/files/entities/projectiles/crescent_gale.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 35
+			c.spread_degrees = c.spread_degrees + 16.0
+			c.screenshake = c.screenshake + 2.0
+		end,
+	},
+
 	-- ALL FOUR -----------------------------------------------------------
 	{
 		id          = "ELEMENTAL_ARTS_ATTUNEMENT",

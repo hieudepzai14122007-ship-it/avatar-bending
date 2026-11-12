@@ -1,0 +1,18 @@
+<!-- Attached to a caster hidden by Smoke Veil: six seconds of the game's own invisibility. -->
+<Entity>
+
+	<InheritTransformComponent>
+	</InheritTransformComponent>
+
+	<GameEffectComponent
+		effect="INVISIBILITY"
+		frames="360"
+		>
+	</GameEffectComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/misc.bank"
+		event_root="game_effect/invisibility" >
+	</AudioComponent>
+
+</Entity>

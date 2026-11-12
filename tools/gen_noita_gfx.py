@@ -496,6 +496,97 @@ def icons():
         "................",
     ], shat).save(os.path.join(UI, "shatter.png"))
 
+    fork = {".": T, "w": (255, 255, 235, 255), "y": (255, 232, 90, 255), "o": (240, 170, 40, 255),
+            "b": (120, 190, 255, 255)}
+    from_rows([
+        "................",
+        ".......yy.......",
+        ".......ww.......",
+        "......yww.......",
+        "......wwy.......",
+        ".....yww........",
+        ".....wwwyy......",
+        "....yywwwy......",
+        "...yww.yww......",
+        "..yww...wwy.....",
+        ".yww.....wwy....",
+        ".ww.......wwy...",
+        "yw.........ywy..",
+        "o...........yw..",
+        "b............ob.",
+        "................",
+    ], fork).save(os.path.join(UI, "forked_lightning.png"))
+
+    statue = {".": T, "h": (214, 196, 150, 255), "m": (150, 130, 96, 255), "d": (92, 78, 60, 255),
+              "k": (58, 50, 42, 255), "y": (255, 232, 120, 255)}
+    from_rows([
+        "................",
+        "..y...hhhh...y..",
+        ".....hhmmmd.....",
+        ".....hmmmmd.....",
+        "......mmmd......",
+        "....hhhmmmdd....",
+        "...hhmmmmmmdd...",
+        "..y.hmmmmmmd.y..",
+        "....hmmmmmmd....",
+        "....hmmmmmdd....",
+        ".....mmmmmd.....",
+        ".....hm..md.....",
+        ".....hm..md.....",
+        ".....mm..dd.....",
+        "...kkkkkkkkkk...",
+        "................",
+    ], statue).save(os.path.join(UI, "stone_form.png"))
+
+    wave = {".": T, "w": (240, 250, 255, 255), "h": (190, 232, 255, 255), "l": (92, 170, 255, 255),
+            "b": (36, 104, 226, 255), "d": (20, 62, 160, 255)}
+    from_rows([
+        "................",
+        "......wwww......",
+        "....wwhhhhww....",
+        "...whhllllhhw...",
+        "..whllbbbblhw.w.",
+        "..hllbb..bblh...",
+        ".whlbb....blhw..",
+        ".hllb......lh...",
+        ".hlbb...........",
+        ".hlbb......w....",
+        ".llbbb..........",
+        ".lbbbbbb........",
+        ".bbbbbbbbbbbb...",
+        ".bbbbddbbbbbbbb.",
+        ".dddddddddddddd.",
+        "................",
+    ], wave).save(os.path.join(UI, "tidal_wave.png"))
+
+    # Smoke Veil: a billow of smoke with the faint outline of a figure in it.
+    img = Image.new("RGBA", (16, 16), T)
+    for cx, cy, r, col in ((5.0, 9.5, 3.8, (120, 120, 128, 255)), (10.5, 9.0, 4.0, (150, 150, 158, 255)),
+                           (7.5, 5.5, 3.6, (176, 176, 184, 255)), (8.0, 11.5, 3.4, (96, 96, 104, 255))):
+        for y in range(16):
+            for x in range(16):
+                if math.hypot(x - cx, y - cy) <= r:
+                    img.putpixel((x, y), col)
+    for px, py in ((7, 5), (8, 5), (7, 6), (8, 6), (6, 8), (7, 8), (8, 8), (9, 8), (6, 9), (7, 9), (8, 9), (9, 9), (7, 10), (8, 10), (7, 11), (8, 11)):
+        img.putpixel((px, py), (210, 210, 218, 255))
+    img.save(os.path.join(UI, "smoke_veil.png"))
+
+    # Elemental Volley: five streaks fanning out from one point, one colour per element.
+    img = Image.new("RGBA", (16, 16), T)
+    fan = (((240, 100, 30, 255), -50), ((70, 150, 255, 255), -25), ((200, 236, 255, 255), 0),
+           ((255, 232, 90, 255), 25), ((236, 244, 244, 255), 50))
+    for col, deg in fan:
+        for step in range(3, 14):
+            px = int(round(1.5 + math.cos(math.radians(deg)) * step))
+            py = int(round(7.5 + math.sin(math.radians(deg)) * step))
+            if 0 <= px < 16 and 0 <= py < 16:
+                img.putpixel((px, py), col)
+                if px + 1 < 16:
+                    img.putpixel((px + 1, py), col)
+    for px, py in ((1, 7), (2, 7), (1, 8), (2, 8)):
+        img.putpixel((px, py), (255, 255, 255, 255))
+    img.save(os.path.join(UI, "elemental_volley.png"))
+
     # Elemental Attunement: four quadrants around a bright core.
     img = Image.new("RGBA", (16, 16), T)
     quads = {
@@ -854,6 +945,30 @@ def frost_sentinel():
     save_sheet("frost_sentinel", [a, a, a, b], 0.15, 3.5, 6.0)
 
 
+def tidal_wave():
+    """A tall curling wave moving right, with a crest that rolls."""
+    w, h, n = 11, 19, 3
+    frames = []
+    for f in range(n):
+        img = Image.new("RGBA", (w, h), T)
+        for y in range(h):
+            t = y / (h - 1)                      # 0 at the crest, 1 at the foot
+            bulge = math.sin(t * math.pi) * 3.5  # the face of the wave leans forward
+            front = 5.0 + bulge + (2.5 if y < 3 else 0) + math.sin(f * 2.1 + y * 0.8) * 0.6
+            back = front - (3.0 + 4.0 * t)
+            for x in range(w):
+                if back <= x <= front:
+                    if x > front - 1.2 or y < 2:
+                        col = (240, 250, 255, 255)
+                    elif x > front - 2.6:
+                        col = (120, 190, 255, 255)
+                    else:
+                        col = (36, 104, 226, 235)
+                    img.putpixel((x, y), col)
+        frames.append(img)
+    save_sheet("tidal_wave", frames, 0.08, 5.5, 9.5)
+
+
 if __name__ == "__main__":
     os.makedirs(UI, exist_ok=True)
     os.makedirs(GFX, exist_ok=True)
@@ -875,4 +990,5 @@ if __name__ == "__main__":
     ember_halo()
     riptide()
     frost_sentinel()
+    tidal_wave()
     print("wrote", sorted(os.listdir(UI)), sorted(os.listdir(GFX)))

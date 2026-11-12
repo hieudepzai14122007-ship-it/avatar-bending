@@ -1,0 +1,54 @@
+<!-- Attached to a caster in Stone Form: holds them in place while the protection lasts. -->
+<Entity>
+
+	<InheritTransformComponent
+		_enabled="1" >
+	</InheritTransformComponent>
+
+	<!-- Same length as the game's short protection effect (100 frames). -->
+	<GameEffectComponent
+		effect="CUSTOM"
+		custom_effect_id="ELEMENTAL_ARTS_STONE_FORM"
+		frames="100"
+		>
+	</GameEffectComponent>
+
+	<LuaComponent
+		script_source_file="mods/elemental_arts/files/scripts/stone_form.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+
+	<!-- Grit falling from the statue. -->
+	<ParticleEmitterComponent
+		emitted_material_name="spark_yellow"
+		offset.x="0"
+		offset.y="-4"
+		x_pos_offset_min="-5"
+		x_pos_offset_max="5"
+		y_pos_offset_min="-8"
+		y_pos_offset_max="8"
+		x_vel_min="-6"
+		x_vel_max="6"
+		y_vel_min="0"
+		y_vel_max="20"
+		gravity.y="120.0"
+		count_min="1"
+		count_max="2"
+		lifetime_min="0.2"
+		lifetime_max="0.6"
+		render_on_grid="1"
+		fade_based_on_lifetime="1"
+		create_real_particles="0"
+		emit_cosmetic_particles="1"
+		emission_interval_min_frames="2"
+		emission_interval_max_frames="4"
+		is_emitting="1" >
+	</ParticleEmitterComponent>
+
+	<!-- In case the effect is not cleaned up for any reason, the hold still ends. -->
+	<LifetimeComponent
+		lifetime="104" >
+	</LifetimeComponent>
+
+</Entity>

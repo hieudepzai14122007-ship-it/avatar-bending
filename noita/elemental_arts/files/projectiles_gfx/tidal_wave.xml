@@ -1,0 +1,19 @@
+<Sprite
+ filename="mods/elemental_arts/files/projectiles_gfx/tidal_wave.png"
+ offset_x="5.5"
+ offset_y="9.5"
+ default_animation="fly" >
+
+ <RectAnimation
+  name="fly"
+  pos_x="0"
+  pos_y="0"
+  frame_count="3"
+  frame_width="11"
+  frame_height="19"
+  frame_wait="0.08"
+  frames_per_row="3"
+  loop="1" >
+ </RectAnimation>
+
+</Sprite>

@@ -1,0 +1,10 @@
+<!-- Forked Lightning: added to a projectile by the modifier. When the projectile ends, bolts arc from it. -->
+<Entity>
+	<LuaComponent
+		_enabled="1"
+		script_source_file="mods/elemental_arts/files/scripts/forked_lightning.lua"
+		execute_every_n_frame="-1"
+		execute_on_removed="1"
+		>
+	</LuaComponent>
+</Entity>
