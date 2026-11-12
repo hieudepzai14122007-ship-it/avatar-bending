@@ -1,0 +1,19 @@
+<Sprite
+ filename="mods/elemental_arts/files/projectiles_gfx/gathering_storm.png"
+ offset_x="6.5"
+ offset_y="2.5"
+ default_animation="fly" >
+
+ <RectAnimation
+  name="fly"
+  pos_x="0"
+  pos_y="0"
+  frame_count="2"
+  frame_width="13"
+  frame_height="5"
+  frame_wait="0.04"
+  frames_per_row="2"
+  loop="1" >
+ </RectAnimation>
+
+</Sprite>

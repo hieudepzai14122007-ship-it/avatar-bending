@@ -1,8 +1,8 @@
 # Elemental Arts: a spell expansion for Noita
 
-A mod for [Noita](https://noitagame.com/) that adds thirteen new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
+A mod for [Noita](https://noitagame.com/) that adds eighteen new elemental spells to the spell pool. They turn up in wands, shops and Holy Mountains like any vanilla spell, and one copy of each is dropped next to you at the start of a new run so you can try them straight away.
 
-![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Thunderstrike](elemental_arts/files/ui_gfx/thunderstrike.png) ![Frost Nova](elemental_arts/files/ui_gfx/frost_nova.png) ![Fire Pillar](elemental_arts/files/ui_gfx/fire_pillar.png) ![Gale Barrier](elemental_arts/files/ui_gfx/gale_barrier.png) ![Quagmire](elemental_arts/files/ui_gfx/quagmire.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
+![Whirlwind](elemental_arts/files/ui_gfx/whirlwind.png) ![Tidal Orb](elemental_arts/files/ui_gfx/tidal_orb.png) ![Stone Lance](elemental_arts/files/ui_gfx/stone_lance.png) ![Flame Serpent](elemental_arts/files/ui_gfx/flame_serpent.png) ![Glacial Shards](elemental_arts/files/ui_gfx/glacial_shards.png) ![Updraft](elemental_arts/files/ui_gfx/updraft.png) ![Magma Bomb](elemental_arts/files/ui_gfx/magma_bomb.png) ![Thunderstrike](elemental_arts/files/ui_gfx/thunderstrike.png) ![Frost Nova](elemental_arts/files/ui_gfx/frost_nova.png) ![Fire Pillar](elemental_arts/files/ui_gfx/fire_pillar.png) ![Gale Barrier](elemental_arts/files/ui_gfx/gale_barrier.png) ![Quagmire](elemental_arts/files/ui_gfx/quagmire.png) ![Waystone](elemental_arts/files/ui_gfx/waystone.png) ![Avalanche](elemental_arts/files/ui_gfx/avalanche.png) ![Crescent Gale](elemental_arts/files/ui_gfx/crescent_gale.png) ![Bubble Prison](elemental_arts/files/ui_gfx/bubble_prison.png) ![Gathering Storm](elemental_arts/files/ui_gfx/gathering_storm.png) ![Elemental Attunement](elemental_arts/files/ui_gfx/attunement.png)
 
 ## The spells
 
@@ -20,6 +20,11 @@ A mod for [Noita](https://noitagame.com/) that adds thirteen new elemental spell
 | **Fire Pillar** | Projectile | 40 | A lobbed ember that erupts into a column of real fire about 80 pixels tall for nearly 2 seconds. Enemies in the column take about 18 fire damage per second and catch fire. Good for blocking a corridor. |
 | **Gale Barrier** | Utility | 60 | A ring of wind that follows you for 4 seconds, 12 uses. Enemy projectiles that fly into it are bounced back out, and enemies that come close are pushed away. It does not stop explosions, melee hits or hazards such as fire and acid. |
 | **Quagmire** | Modifier | 8 | The projectile leaves a trail of mud and bogs down what it hits: the target moves much slower for 10 seconds. Adds 2.5 damage. |
+| **Waystone** | Utility | 50 | Cast once to leave a glowing waystone where you stand. Cast again to return to it instantly, which uses the stone up. A waystone fades after two minutes. If the spot has since been filled in, for example by your own Stone Lance, you arrive inside the rock. |
+| **Avalanche** | Projectile | 25 | A snowball that bounces along and grows as it goes. It starts at 5 damage and gains 1.25 every 4 frames, up to +50 and three times the size after about 2.7 seconds. Briefly freezes what it hits. Weak up close, strong at the end of a long tunnel. |
+| **Crescent Gale** | Projectile | 30 | A blade of wind that cuts through enemies (12.5 slice damage per hit), flies about 130 pixels, then curves around and returns to you, cutting them again on the way back. It bounces off walls. |
+| **Bubble Prison** | Projectile | 30 | A drifting bubble. The first enemy it touches is sealed inside and carried upwards for 3 seconds, feet off the ground, then dropped. It also soaks the enemy. Barely any damage; it is for taking a dangerous enemy out of the fight. |
+| **Gathering Storm** | Projectile | 35 | A bolt that charges while the spell rests. It always deals 7.5 electric damage, plus up to 45 more depending on how long ago you last cast it: nothing in the first third of a second, the full bonus after 4 seconds. Rapid fire wastes it; a patient shot hits very hard. |
 | **Elemental Attunement** | Modifier | 12 | Each cast infuses the projectile with the next element in a fixed cycle: **air** (60% faster, more accurate, strong knockback), **water** (soaks the target, always crits soaked targets, leaves a water trail), **earth** (+10 damage, +15% crit chance, 15% slower), **fire** (+6 fire damage, ignites the target, leaves a fire trail). |
 
 For reference, the starting Spark Bolt deals 3 damage.
@@ -28,7 +33,7 @@ Stone Lance and Flame Serpent start their stone and fire a short distance from t
 
 ## Install
 
-1. Download [`release/ElementalArts-1.2.0-Noita.zip`](../release/ElementalArts-1.2.0-Noita.zip) and unzip it.
+1. Download [`release/ElementalArts-1.3.0-Noita.zip`](../release/ElementalArts-1.3.0-Noita.zip) and unzip it.
 2. Copy the `elemental_arts` folder into the `mods` folder of your Noita install. On Steam: right-click Noita → **Manage → Browse local files**, then open `mods`.
    The folder must keep the name `elemental_arts`, because the mod loads its files by that path.
 3. Start Noita, open **Mods**, and enable **Elemental Arts - Spell Expansion**.
@@ -48,7 +53,7 @@ In **Mods → Mod settings**:
 
 ## Status
 
-The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the five spell scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
+The mod has not been run inside Noita yet. It was built against Noita's own data files, and these checks pass: every XML component and attribute it uses also appears in the vanilla files; every vanilla file, material and sound it refers to exists; and all of the mod's Lua (the spell definitions, the nine spell scripts, the settings and the start-up code) runs under LuaJIT against a stand-in for the game's functions. Balance numbers are a first pass and may need tuning after play.
 
 ## Files
 
@@ -58,9 +63,10 @@ elemental_arts/
   init.lua                      registers the spells, drops the starter spells
   settings.lua                  the mod setting
   files/
-    actions.lua                 the thirteen spell definitions
+    actions.lua                 the eighteen spell definitions
     entities/projectiles/       the projectiles, plus what they leave behind (splashes, the fire column)
-    scripts/                    whirlwind, updraft, thunderstrike, frost_nova, gale_barrier
+    entities/misc/              the waystone and the bubble that holds a trapped enemy
+    scripts/                    one script per spell that needs one (nine in all)
     ui_gfx/                     spell icons
     projectiles_gfx/            projectile sprites
 ```

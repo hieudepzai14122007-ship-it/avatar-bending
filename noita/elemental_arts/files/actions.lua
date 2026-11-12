@@ -6,6 +6,9 @@
 -- 1 = air, 2 = water, 3 = earth, 4 = fire.
 elemental_arts_attunement_step = elemental_arts_attunement_step or 0
 
+-- Frame on which Gathering Storm was last cast, to work out how long it has charged.
+elemental_arts_storm_last_cast = elemental_arts_storm_last_cast or nil
+
 local elemental_arts_actions =
 {
 	-- AIR ----------------------------------------------------------------
@@ -250,6 +253,121 @@ local elemental_arts_actions =
 			c.damage_projectile_add = c.damage_projectile_add + 0.1
 			c.extra_entities = c.extra_entities .. "data/entities/particles/tinyspark_yellow.xml,"
 			draw_actions( 1, true )
+		end,
+	},
+
+	-- EARTH (travel) -----------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_WAYSTONE",
+		name        = "Waystone",
+		description = "Cast once to leave a waystone where you stand. Cast again to return to it instantly",
+		sprite      = "mods/elemental_arts/files/ui_gfx/waystone.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/teleport_projectile_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/waystone_cast.xml"},
+		type        = ACTION_TYPE_UTILITY,
+		spawn_level       = "1,2,3,4,5,6",
+		spawn_probability = "0.3,0.5,0.5,0.5,0.4,0.4",
+		price = 260,
+		mana = 50,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/waystone_cast.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 30
+		end,
+	},
+
+	-- ICE (growing) ------------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_AVALANCHE",
+		name        = "Avalanche",
+		description = "A bouncing snowball that grows as it travels. The farther it rolls, the harder it hits",
+		sprite      = "mods/elemental_arts/files/ui_gfx/avalanche.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/rubber_ball_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/avalanche.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "0,1,2,3,4",
+		spawn_probability = "0.6,0.8,0.8,0.6,0.4",
+		price = 160,
+		mana = 25,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/avalanche.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 16
+		end,
+	},
+
+	-- WIND (returning) ---------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_CRESCENT_GALE",
+		name        = "Crescent Gale",
+		description = "A blade of wind that cuts through enemies, then curves around and flies back to you, cutting them again",
+		sprite      = "mods/elemental_arts/files/ui_gfx/crescent_gale.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/disc_bullet_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/crescent_gale.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.6,0.8,0.8,0.6,0.5",
+		price = 190,
+		mana = 30,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/crescent_gale.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 20
+		end,
+	},
+
+	-- WATER (control) ----------------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_BUBBLE_PRISON",
+		name        = "Bubble Prison",
+		description = "Traps an enemy in a bubble that lifts it helplessly into the air for a few seconds",
+		sprite      = "mods/elemental_arts/files/ui_gfx/bubble_prison.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/bubbleshot_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/bubble_prison.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5",
+		spawn_probability = "0.5,0.7,0.7,0.6,0.4",
+		price = 180,
+		mana = 30,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/bubble_prison.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 18
+		end,
+	},
+
+	-- LIGHTNING (charging) -----------------------------------------------
+	{
+		id          = "ELEMENTAL_ARTS_GATHERING_STORM",
+		name        = "Gathering Storm",
+		description = "A bolt that charges while the spell rests. The longer since you last cast it, up to four seconds, the harder it hits",
+		sprite      = "mods/elemental_arts/files/ui_gfx/gathering_storm.png",
+		sprite_unidentified = "data/ui_gfx/gun_actions/electric_charge_unidentified.png",
+		related_projectiles = {"mods/elemental_arts/files/entities/projectiles/gathering_storm.xml"},
+		type        = ACTION_TYPE_PROJECTILE,
+		spawn_level       = "1,2,3,4,5,6",
+		spawn_probability = "0.5,0.7,0.7,0.6,0.5,0.4",
+		price = 220,
+		mana = 35,
+		action = function()
+			add_projectile("mods/elemental_arts/files/entities/projectiles/gathering_storm.xml")
+			c.fire_rate_wait = c.fire_rate_wait + 10
+
+			-- The game also calls actions just to read their stats ("reflecting").
+			-- Only a real cast uses up the charge.
+			if not reflecting then
+				local now = GameGetFrameNum()
+				local charge = 1.0 -- the first cast of a session counts as fully charged
+				if elemental_arts_storm_last_cast ~= nil and now >= elemental_arts_storm_last_cast then
+					-- nothing for the first third of a second, full after four seconds (240 frames)
+					local rested = now - elemental_arts_storm_last_cast
+					charge = math.max( 0.0, math.min( 1.0, ( rested - 20 ) / 220 ) )
+				end
+				elemental_arts_storm_last_cast = now
+
+				-- up to +45 electric damage on top of the bolt's own 7.5
+				c.damage_electricity_add = c.damage_electricity_add + 1.8 * charge
+				c.screenshake = c.screenshake + 5.0 * charge
+				if charge >= 0.5 then
+					c.extra_entities = c.extra_entities .. "data/entities/particles/tinyspark_yellow.xml,"
+				end
+			end
 		end,
 	},
 

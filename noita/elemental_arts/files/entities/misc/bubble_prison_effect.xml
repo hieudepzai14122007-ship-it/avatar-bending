@@ -1,0 +1,37 @@
+<!-- Attached to an enemy hit by Bubble Prison: the bubble that carries it upwards. -->
+<Entity>
+
+	<InheritTransformComponent
+		_enabled="1" >
+	</InheritTransformComponent>
+
+	<!-- Keeps the bubble on its victim for 3 seconds, then removes it. -->
+	<GameEffectComponent
+		effect="CUSTOM"
+		custom_effect_id="ELEMENTAL_ARTS_BUBBLE_PRISON"
+		frames="180"
+		>
+	</GameEffectComponent>
+
+	<LuaComponent
+		script_source_file="mods/elemental_arts/files/scripts/bubble_prison.lua"
+		execute_every_n_frame="1"
+		>
+	</LuaComponent>
+
+	<SpriteComponent
+		_enabled="1"
+		alpha="0.7"
+		image_file="mods/elemental_arts/files/projectiles_gfx/bubble_prison_big.xml"
+		next_rect_animation=""
+		rect_animation=""
+		z_index="-1"
+		>
+	</SpriteComponent>
+
+	<!-- In case the effect is not cleaned up for any reason, the bubble still ends. -->
+	<LifetimeComponent
+		lifetime="185" >
+	</LifetimeComponent>
+
+</Entity>

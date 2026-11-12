@@ -1,0 +1,19 @@
+<Sprite
+ filename="mods/elemental_arts/files/projectiles_gfx/bubble_prison_big.png"
+ offset_x="11.5"
+ offset_y="11.5"
+ default_animation="fly" >
+
+ <RectAnimation
+  name="fly"
+  pos_x="0"
+  pos_y="0"
+  frame_count="4"
+  frame_width="23"
+  frame_height="23"
+  frame_wait="0.12"
+  frames_per_row="4"
+  loop="1" >
+ </RectAnimation>
+
+</Sprite>

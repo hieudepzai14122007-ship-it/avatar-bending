@@ -306,6 +306,92 @@ def icons():
         "................",
     ], mud).save(os.path.join(UI, "quagmire.png"))
 
+    stone = {".": T, "h": (214, 196, 150, 255), "m": (150, 130, 96, 255), "d": (92, 78, 60, 255),
+             "k": (58, 50, 42, 255), "g": (255, 232, 120, 255), "w": (255, 255, 235, 255)}
+    from_rows([
+        "................",
+        "......g..g......",
+        "....g......g....",
+        "......hhhh......",
+        ".....hhmmmd.....",
+        "....hhmmmmdd....",
+        "....hmmgwmmd....",
+        "....hmgwmwgd....",
+        "....hmgwmwgd....",
+        "....hmmgwmmd....",
+        "....hmmmmmdd....",
+        "....mmmmmmdd....",
+        "...kmmmmmdddk...",
+        "..kkkdddddkkkk..",
+        "................",
+        "................",
+    ], stone).save(os.path.join(UI, "waystone.png"))
+
+    # Avalanche: three snowballs of growing size along an arc.
+    img = Image.new("RGBA", (16, 16), T)
+    for cx, cy, r in ((2.5, 4.0, 1.4), (6.0, 7.0, 2.3), (11.0, 10.5, 3.9)):
+        for y in range(16):
+            for x in range(16):
+                d = math.hypot(x - cx, y - cy)
+                if d <= r:
+                    if d > r - 0.9 and (x > cx or y > cy):
+                        col = (130, 180, 225, 255)
+                    elif x < cx and y < cy:
+                        col = (255, 255, 255, 255)
+                    else:
+                        col = (214, 236, 250, 255)
+                    img.putpixel((x, y), col)
+    img.save(os.path.join(UI, "avalanche.png"))
+
+    # Crescent Gale: a crescent blade with a curved return path.
+    img = Image.new("RGBA", (16, 16), T)
+    for y in range(16):
+        for x in range(16):
+            outer = math.hypot(x - 8.0, y - 7.5)
+            inner = math.hypot(x - 5.2, y - 7.5)
+            if outer <= 6.2 and inner > 5.4:
+                col = (245, 250, 250, 255) if outer > 5.0 else (176, 200, 204, 255)
+                img.putpixel((x, y), col)
+    for x, y in ((3, 13), (5, 14), (7, 14), (9, 14), (2, 11)):
+        img.putpixel((x, y), (110, 136, 146, 255))
+    img.save(os.path.join(UI, "crescent_gale.png"))
+
+    # Bubble Prison: a bubble with a small dark figure inside.
+    img = Image.new("RGBA", (16, 16), T)
+    for y in range(16):
+        for x in range(16):
+            d = math.hypot(x - 7.5, y - 7.5)
+            if 5.6 < d <= 6.9:
+                img.putpixel((x, y), (120, 200, 255, 255) if (x + y) > 12 else (210, 240, 255, 255))
+            elif d <= 5.6:
+                img.putpixel((x, y), (60, 130, 220, 70))
+    for x, y in ((4, 4), (5, 3), (4, 5)):
+        img.putpixel((x, y), (255, 255, 255, 255))
+    for x, y in ((7, 6), (8, 6), (7, 7), (8, 7), (6, 8), (7, 8), (8, 8), (9, 8), (7, 9), (8, 9), (7, 10), (8, 10), (6, 11), (9, 11)):
+        img.putpixel((x, y), (40, 50, 80, 255))
+    img.save(os.path.join(UI, "bubble_prison.png"))
+
+    storm = {".": T, "w": (255, 255, 255, 255), "l": (170, 215, 255, 255), "b": (80, 150, 240, 255),
+             "d": (40, 80, 170, 255), "y": (255, 232, 90, 255)}
+    from_rows([
+        "................",
+        "......dbbd......",
+        "....dbllllbd....",
+        "...dbllwwllbd...",
+        "..dbllwwwwllbd..",
+        "..bllwwyywwllb..",
+        "..bllwyyyywllb..",
+        "..bllwwyywwllb..",
+        "..dbllwwwwllbd..",
+        "...dbllwwllbd...",
+        "....dbllllbd....",
+        "......dbbd......",
+        ".y....y..y....y.",
+        "...y...yy...y...",
+        ".....y....y.....",
+        "................",
+    ], storm).save(os.path.join(UI, "gathering_storm.png"))
+
     # Elemental Attunement: four quadrants around a bright core.
     img = Image.new("RGBA", (16, 16), T)
     quads = {
@@ -509,6 +595,105 @@ def fire_pillar():
     save_sheet("fire_pillar", [a, b], 0.06, 5.5, 2.5)
 
 
+def waystone():
+    """A small standing stone with a glowing ring rune."""
+    pal = {".": T, "h": (214, 196, 150, 255), "m": (150, 130, 96, 255), "d": (92, 78, 60, 255),
+           "g": (255, 232, 120, 255), "w": (255, 255, 235, 255)}
+    a = from_rows([
+        "..hhhh...",
+        ".hhmmmd..",
+        "hhmmmmdd.",
+        "hmmgwmmd.",
+        "hmgwmwgd.",
+        "hmgwmwgd.",
+        "hmmgwmmd.",
+        "hmmmmmdd.",
+        "mmmmmmdd.",
+        "mmmmmddd.",
+        ".ddddddd.",
+    ], pal)
+    b = a.copy()
+    for y in range(b.height):
+        for x in range(b.width):
+            if b.getpixel((x, y)) == pal["g"]:
+                b.putpixel((x, y), pal["w"])
+    save_sheet("waystone", [a, b], 0.5, 4.5, 5.5)
+
+
+def avalanche():
+    """A plain snowball. The game scales it up as it grows."""
+    s = 7
+    img = Image.new("RGBA", (s, s), T)
+    for y in range(s):
+        for x in range(s):
+            d = math.hypot(x - 3, y - 3)
+            if d > 3.3:
+                continue
+            if d > 2.4 and (x > 3 or y > 3):
+                col = (130, 180, 225, 255)
+            elif x < 3 and y < 3:
+                col = (255, 255, 255, 255)
+            else:
+                col = (214, 236, 250, 255)
+            img.putpixel((x, y), col)
+    save_sheet("avalanche", [img], 0.2, 3.5, 3.5)
+
+
+def crescent_gale():
+    """A crescent blade, bulging to the right (the flight direction)."""
+    w, h = 9, 13
+    img = Image.new("RGBA", (w, h), T)
+    for y in range(h):
+        for x in range(w):
+            outer = math.hypot(x - 2.0, y - 6.0)
+            inner = math.hypot(x - (-1.2), y - 6.0)
+            if outer <= 6.3 and inner > 6.6:
+                img.putpixel((x, y), (245, 250, 250, 255) if outer > 5.0 else (176, 200, 204, 220))
+    save_sheet("crescent_gale", [img], 0.2, 4.5, 6.5)
+
+
+def bubble(name, size, wait):
+    """A hollow bubble with a highlight that wobbles."""
+    frames = []
+    c = (size - 1) / 2
+    r = size / 2 - 0.3
+    for f in range(4):
+        img = Image.new("RGBA", (size, size), T)
+        wob = math.sin(f * math.pi / 2) * 0.35
+        for y in range(size):
+            for x in range(size):
+                d = math.hypot((x - c) * (1 + wob * 0.06), (y - c) * (1 - wob * 0.06))
+                if r - 1.4 < d <= r:
+                    img.putpixel((x, y), (120, 200, 255, 255) if (x + y) > size else (210, 240, 255, 255))
+                elif d <= r - 1.4:
+                    img.putpixel((x, y), (60, 130, 220, 60))
+        hx, hy = int(c - r * 0.45), int(c - r * 0.45)
+        img.putpixel((hx, hy), (255, 255, 255, 255))
+        img.putpixel((hx + 1, hy - 1), (255, 255, 255, 255))
+        frames.append(img)
+    save_sheet(name, frames, wait, size / 2, size / 2)
+
+
+def gathering_storm():
+    """A blue-white bolt pointing right, flickering between two shapes."""
+    pal = {".": T, "w": (255, 255, 255, 255), "l": (170, 215, 255, 255), "b": (80, 150, 240, 255)}
+    a = from_rows([
+        "...b.....l...",
+        ".bll..llwwl..",
+        "bllwwwwwwwwwl",
+        ".bll..llwwl..",
+        "...b.....l...",
+    ], pal)
+    b = from_rows([
+        ".b.....l.....",
+        "..bll.llwwl.l",
+        "bllwwwwwwwwww",
+        ".bl...llwwl..",
+        "....b...l....",
+    ], pal)
+    save_sheet("gathering_storm", [a, b], 0.04, 6.5, 2.5)
+
+
 if __name__ == "__main__":
     os.makedirs(UI, exist_ok=True)
     os.makedirs(GFX, exist_ok=True)
@@ -521,4 +706,10 @@ if __name__ == "__main__":
     magma_bomb()
     thunderstrike()
     fire_pillar()
+    waystone()
+    avalanche()
+    crescent_gale()
+    bubble("bubble_prison", 9, 0.1)
+    bubble("bubble_prison_big", 23, 0.12)
+    gathering_storm()
     print("wrote", sorted(os.listdir(UI)), sorted(os.listdir(GFX)))
